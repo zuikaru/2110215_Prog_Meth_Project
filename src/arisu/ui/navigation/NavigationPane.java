@@ -1,4 +1,4 @@
-package arisu.ui;
+package arisu.ui.navigation;
 
 import arisu.Arisu;
 import arisu.util.SimpleBackground;
@@ -13,9 +13,8 @@ public class NavigationPane extends VBox{
 	public NavigationPane(Arisu app) {
 		this.scene = app.getScene();
 		getChildren().addAll(
-				new NavigationItem("Home", new Image("assets/menu/cute-home-64.png")),
-				new NavigationItem("Course", new Image("assets/menu/cute-books-64.png")),
-				new NavigationItem("Setting", new Image("assets/menu/cute-gear-64.png"))
+				new NavigationItem("Edit", new Image("assets/menu/design.png")),
+				new NavigationItem("Browse", new Image("assets/menu/books.png"))
 		);
 		setBackground(SimpleBackground.web("#34495e"));
 		setMinWidth(150);

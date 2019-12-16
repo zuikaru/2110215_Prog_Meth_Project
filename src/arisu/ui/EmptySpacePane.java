@@ -3,7 +3,6 @@ package arisu.ui;
 import arisu.Arisu;
 import arisu.util.SimpleBackground;
 import arisu.util.SizeAdapter;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;

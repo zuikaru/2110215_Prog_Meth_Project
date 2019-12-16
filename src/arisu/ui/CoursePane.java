@@ -13,23 +13,11 @@ import arisu.service.reg.RegChulaAPI;
 import arisu.service.reg.Semester;
 import arisu.util.SizeAdapter;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -39,8 +27,6 @@ public class CoursePane extends VBox{
 	private ProgressBar p;
 	private Button refresh;
 	private boolean working = false;
-	private boolean oneTime = true;
-	
 	public CoursePane(Arisu app) {
 		setPadding(new Insets(16));
 		SizeAdapter.use(app.getScene(), this);

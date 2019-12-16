@@ -2,8 +2,8 @@ package arisu.ui.schedule;
 
 import java.time.DayOfWeek;
 
+import arisu.model.CourseAdaptor;
 import arisu.util.LocalTimeRange;
-import javafx.scene.control.Label;
 
 public class CourseCell extends LabelCell implements ScheduleTableCell{
 	
@@ -15,6 +15,7 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 	private String teachingMethod;
 	private String building;
 	private String room;
+	private CourseAdaptor origin;
 	
 	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName,
 			int section,String building, String room, String teachingMethod) {
@@ -36,11 +37,11 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 	}
 
 	private String buildText() {
+		String displayedRoom = (room != null) ? (room.isBlank() ? "" : String.format("(%s)", room)) : "";
 		String firstLine = String.format("%s (%d)", courseNumber, section);
-		String secondLine = String.format("\n%s", courseName);
-		String thirdLine = String.format("\n%s %s(%s)", teachingMethod, building, room);
-		String result = firstLine + secondLine;
-		if(!(building == null && room == null && teachingMethod == null)) result += thirdLine;
+		String secondLine = courseName;
+		String thirdLine = String.format("%s%s", building == null ? "" : building, displayedRoom);
+		String result = firstLine + "\n" + secondLine + (thirdLine.isBlank() ? "" : "\n" + thirdLine);
 		return result;
 	}
 
@@ -53,4 +54,44 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 	public LocalTimeRange getTimeRange() {
 		return timeRange;
 	}
+
+	public String getCourseNumber() {
+		return courseNumber;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public int getSection() {
+		return section;
+	}
+
+	public String getTeachingMethod() {
+		return teachingMethod;
+	}
+
+	public String getBuilding() {
+		return building;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+	
+	public CourseAdaptor getOrigin() {
+		return origin;
+	}
+	
+	public void setOrigin(CourseAdaptor courseAdaptor) {
+		this.origin = courseAdaptor;
+	}
+
+	@Override
+	public String toString() {
+		return "CourseCell [day=" + day + ", timeRange=" + timeRange + ", courseNumber=" + courseNumber
+				+ ", courseName=" + courseName + ", section=" + section + ", teachingMethod=" + teachingMethod
+				+ ", building=" + building + ", room=" + room + "]";
+	}
+	
 }

@@ -1,7 +1,14 @@
 package arisu.util;
 
+import arisu.Arisu;
+import arisu.ui.AlertHeader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
+import jfxtras.styles.jmetro.JMetro;
 
 /**
  * Collection of utility for UI system
@@ -21,5 +28,20 @@ public class UIUtil {
 		}
 	}
 	
+	public static void styleNode(Parent parent) {
+		new JMetro(parent, Arisu.app().getStyle());
+		parent.getStyleClass().add("background");
+	}
+	
+	public static Alert makeAlert(AlertType alertType, String contentText, ButtonType ...buttons) {
+		Alert alert = new Alert(alertType, contentText, buttons);
+		alert.getDialogPane().setHeader(new AlertHeader(alert));
+		UIUtil.styleNode(alert.getDialogPane());
+		return alert;
+	}
+	
+	public static Alert makeAlert(AlertType alertType) {
+		return UIUtil.makeAlert(alertType, "");
+	}
 	
 }

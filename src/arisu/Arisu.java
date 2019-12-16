@@ -2,21 +2,20 @@ package arisu;
 
 import arisu.ui.ContentPane;
 import arisu.ui.CoursePane;
-import arisu.ui.EmptySpacePane;
-import arisu.ui.NavigationPane;
+import arisu.ui.navigation.NavigationPane;
 import arisu.ui.schedule.ClassSchedulePane;
+import arisu.util.UIUtil;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
-public class Arisu extends Application{
-	
+public class Arisu extends Application {
+
 	private static Arisu instance;
-	
+
 	private Style style = Style.DARK;
 	private Stage stage;
 	private Scene scene;
@@ -35,42 +34,43 @@ public class Arisu extends Application{
 		stage = primaryStage;
 		// Root
 		root = new HBox();
-		new JMetro(root, style);
-		scene = new Scene(root, 960, 540);
+		UIUtil.styleNode(root);
+		scene = new Scene(root, 1120, 630);
+		stage.setMaxWidth(1280);
+		stage.setMaxHeight(720);
 		// Components
 		navigation = new NavigationPane(this);
 		content = new ContentPane(this);
-		content.add("home", new ClassSchedulePane(this));
-		content.add("course", new CoursePane(this));
-		content.add("setting", new EmptySpacePane(this, "Setting"));
-		content.setCurrent("home");
+		content.add("edit", new ClassSchedulePane(this));
+		content.add("browse", new CoursePane(this));
+		content.setCurrent("edit");
 		root.getChildren().addAll(navigation, content);
-		root.getStyleClass().add("background");
 		primaryStage.setTitle("Class Schedule Planner");
 		primaryStage.setScene(scene);
-		primaryStage.getIcons().addAll(
-				new Image(ClassLoader.getSystemResource("app-icon-64.png").toString()));
+		primaryStage.getIcons().addAll(new Image(ClassLoader.getSystemResource("app-icon.png").toString()));
 		primaryStage.show();
 	}
-	
-	
-	
+
 	public static Arisu app() {
 		return instance;
 	}
-	
+
 	public HBox getRoot() {
 		return this.root;
 	}
-	
+
 	public Scene getScene() {
 		return this.scene;
 	}
-	
+
+	public Stage getStage() {
+		return this.stage;
+	}
+
 	public ContentPane getContentPane() {
 		return this.content;
 	}
-	
+
 	public Style getStyle() {
 		return style;
 	}

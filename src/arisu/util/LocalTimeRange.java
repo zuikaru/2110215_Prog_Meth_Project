@@ -2,8 +2,6 @@ package arisu.util;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalUnit;
 import java.util.Objects;
 
@@ -49,7 +47,12 @@ public class LocalTimeRange {
 	}
 	
 	public boolean overlapWith(LocalTimeRange another) {
-		return another.start.isBefore(this.end);
+		if(this.start.isBefore(another.start)) {
+			return this.end.isAfter(another.start);
+		}
+		else {
+			return another.end.isAfter(this.start);
+		}
 	}
 
 	@Override

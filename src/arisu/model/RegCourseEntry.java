@@ -8,17 +8,17 @@ import arisu.service.reg.Course;
 import arisu.service.reg.CourseDetail;
 import arisu.service.reg.Section;
 import arisu.ui.schedule.CourseCell;
-import arisu.ui.schedule.ScheduleTableView;
 import arisu.util.LocalTimeRange;
+import javafx.scene.control.ListCell;
 
-public class CourseEntry extends CourseCellAdaptor{
+public class RegCourseEntry extends CourseAdaptor{
 	
 	private List<CourseCell> courseCells;
 	private Course course;
 	private CourseDetail detail;
 	private Section section;
 	
-	public CourseEntry(Course course, CourseDetail detail, Section section) {
+	public RegCourseEntry(Course course, CourseDetail detail, Section section) {
 		this.courseCells = new ArrayList<>();
 		this.course = course;
 		this.detail = detail;
@@ -27,6 +27,7 @@ public class CourseEntry extends CourseCellAdaptor{
 			CourseCell each = new CourseCell(
 					schedule.getDay(), new LocalTimeRange(schedule.getStart(), schedule.getEnd()), 
 					course.getNumber(), course.getName(), section.getNumber());
+			each.setOrigin(this);
 			courseCells.add(each);
 		}
 	}
@@ -34,5 +35,10 @@ public class CourseEntry extends CourseCellAdaptor{
 	@Override
 	public List<CourseCell> getCourseCells() {
 		return courseCells;
+	}
+
+	@Override
+	public void updateListCell(ListCell<CourseAdaptor> listCell) {
+		listCell.setText(course.getNumber() + " - " + course.getName());
 	}
 }
