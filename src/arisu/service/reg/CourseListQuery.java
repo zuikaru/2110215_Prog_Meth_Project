@@ -32,7 +32,7 @@ public class CourseListQuery extends AbstractQuery {
 	protected QueryParameter<String> download;
 	protected QueryParameter<String> lang;
 
-	private final Function<Year, String> TO_BUDDHIST_YEAR = (year) -> Integer.toString(year.getValue() + 543);
+	private static final Function<Year, String> TO_BUDDHIST_YEAR = year -> Integer.toString(year.getValue() + 543);
 
 	protected void initMagicFields() {
 		magicExamDate = new QueryParameter<>("examdateCombo", "I2018207/05/1476");

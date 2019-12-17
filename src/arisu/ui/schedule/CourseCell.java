@@ -40,8 +40,7 @@ public class CourseCell extends LabelCell implements ScheduleTableCell {
 		String firstLine = String.format("%s (%d)", courseNumber, section);
 		String secondLine = courseName;
 		String thirdLine = String.format("%s%s", building == null ? "" : building, displayedRoom);
-		String result = firstLine + "\n" + secondLine + (thirdLine.isBlank() ? "" : "\n" + thirdLine);
-		return result;
+		return firstLine + "\n" + secondLine + (thirdLine.isBlank() ? "" : "\n" + thirdLine);
 	}
 
 	@Override

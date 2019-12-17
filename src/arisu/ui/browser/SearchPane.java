@@ -14,7 +14,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 
 public class SearchPane extends GridPane {
-	private CourseBrowserPane browserPane;
 	// Acad year
 	private Label yearLabel = new Label("Year");
 	private TextField year = new TextField("2019");
@@ -31,7 +30,6 @@ public class SearchPane extends GridPane {
 	private Button search = new Button("Search");
 
 	public SearchPane(CourseBrowserPane browserPane) {
-		this.browserPane = browserPane;
 		setHgap(8);
 		setVgap(8);
 		year.setPromptText("eg. 2019");
@@ -40,7 +38,7 @@ public class SearchPane extends GridPane {
 		courseNumber.setPromptText("eg. 2110");
 		courseNumber.setPrefWidth(100);
 		courseName.setPromptText("eg. PROG");
-		courseName.setTextFormatter(new TextFormatter<>((change) -> {
+		courseName.setTextFormatter(new TextFormatter<>(change -> {
 			change.setText(change.getText().toUpperCase());
 			return change;
 		}));

@@ -28,12 +28,12 @@ public class RegChulaAPI extends HttpAPI {
 
 	static final String REG_CHULA_BASE_URL = "https://cas.reg.chula.ac.th/";
 	static final String REG_CHULA_QUERY_COURSE = "/servlet/com.dtm.chula.cs.servlet.QueryCourseScheduleNew.CourseListNewServlet";
-	static final String ENCODING = "x-windows-874";
+	static final String REG_CHULA_ENCODING = "x-windows-874";
 	static final String REG_CHULA_QUERY_COURSE_DETAIL = "/servlet/com.dtm.chula.cs.servlet.QueryCourseScheduleNew.CourseScheduleDtlNewServlet";
 
 	public RegChulaAPI() {
 		super(REG_CHULA_BASE_URL);
-		this.setEncoding(ENCODING);
+		this.setEncoding(REG_CHULA_ENCODING);
 	}
 
 	@Override
@@ -134,7 +134,6 @@ public class RegChulaAPI extends HttpAPI {
 			}
 			boolean closed = false;
 			int section = 0;
-			String teaching = "";
 			String building = "";
 			String room = "";
 			LocalTimeRange time = null;
@@ -155,8 +154,6 @@ public class RegChulaAPI extends HttpAPI {
 			if (cols.get(1).matches("^\\d+$")) {
 				section = Integer.parseInt(cols.get(1));
 			}
-			// teaching
-			teaching = cols.get(2);
 			// dates
 			List<DayOfWeek> days = new ArrayList<>();
 			for (String day : cols.get(3).split(" ")) {

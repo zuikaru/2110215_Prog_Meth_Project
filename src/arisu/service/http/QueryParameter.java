@@ -2,6 +2,9 @@ package arisu.service.http;
 
 import java.lang.reflect.Constructor;
 import java.util.function.Function;
+import java.util.logging.Level;
+
+import arisu.Arisu;
 
 public class QueryParameter<T> implements QueryKeyValue {
 
@@ -23,6 +26,7 @@ public class QueryParameter<T> implements QueryKeyValue {
 		this.mapper = mapper;
 	}
 
+	@SuppressWarnings("unchecked")
 	public QueryParameter(QueryParameter<T> qp) {
 		this.key = qp.key;
 		this.value = (T) copyUsingCopyConstructor(qp.value);
@@ -69,7 +73,8 @@ public class QueryParameter<T> implements QueryKeyValue {
 		try {
 			Constructor<? extends Object> c = o.getClass().getConstructor(o.getClass());
 			return c.newInstance(o);
-		} catch (ReflectiveOperationException ignored) {
+		} catch (ReflectiveOperationException ex) {
+			Arisu.logger().log(Level.SEVERE, "Problem while copying object", ex);
 		}
 		return o;
 	}

@@ -17,8 +17,7 @@ public class NavigationPane extends VBox {
 		setBackground(SimpleBackground.web("#34495e"));
 		setMinWidth(150);
 		setPrefHeight(this.scene.getHeight());
-		this.scene.heightProperty().addListener((obs, oldValue, newValue) -> {
-			this.setPrefHeight(this.scene.getHeight());
-		});
+		this.scene.heightProperty()
+				.addListener((obs, oldValue, newValue) -> this.setPrefHeight(this.scene.getHeight()));
 	}
 }

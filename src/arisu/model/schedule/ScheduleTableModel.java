@@ -14,12 +14,10 @@ import javafx.collections.ObservableList;
 
 public class ScheduleTableModel {
 	private ScheduleTableView tableView;
-	private ClassSchedulePane schedulePane;
 	private ObservableList<CourseAdaptor> courses;
 	private Map<DayOfWeek, Map<LocalTimeRange, CourseAdaptor>> usedTimes;
 
 	public ScheduleTableModel(ClassSchedulePane schedulePane) {
-		this.schedulePane = schedulePane;
 		this.tableView = schedulePane.getTableView();
 		this.courses = FXCollections.<CourseAdaptor>observableArrayList();
 		this.courses.addListener(this::onChanged);

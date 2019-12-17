@@ -18,14 +18,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class ScheduleTableView extends GridPane {
-	static final int DEFAULT_CELL_WIDTH = 100;
-	static final int DEFAULT_CELL_HEIGHT = 75;
+	static final double DEFAULT_CELL_WIDTH = 100;
+	static final double DEFAULT_CELL_HEIGHT = 75;
 	static final LocalTime TIME_LOWER_LIMIT = LocalTime.of(8, 0);
 	static final LocalTime TIME_UPPER_LIMIT = LocalTime.of(16, 0);
-	private ClassSchedulePane schedulePane;
 
 	public ScheduleTableView(ClassSchedulePane schedulePane) {
-		this.schedulePane = schedulePane;
 		setBackground(SimpleBackground.web("#333"));
 		initDayOfWeek();
 		initTime();
@@ -70,11 +68,9 @@ public class ScheduleTableView extends GridPane {
 			Node child = it.next();
 			Integer rowIndex = getRowIndex(child);
 			Integer colIndex = getColumnIndex(child);
-			if (rowIndex != null && colIndex != null) {
-				if (rowIndex == row && colIndex == col) {
-					it.remove();
-					removed++;
-				}
+			if (rowIndex != null && colIndex != null && rowIndex == row && colIndex == col) {
+				it.remove();
+				removed++;
 			}
 		}
 		return removed;
@@ -109,7 +105,6 @@ public class ScheduleTableView extends GridPane {
 			if (day.equals(DayOfWeek.SUNDAY))
 				continue;
 			String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()).toUpperCase();
-			// Label label = new LabelCell(text, DEFAULT_CELL_WIDTH/2, DEFAULT_CELL_HEIGHT);
 			Label label = new LabelCell(text);
 			label.setMinSize(DEFAULT_CELL_WIDTH / 2, DEFAULT_CELL_HEIGHT);
 			label.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD, 12));

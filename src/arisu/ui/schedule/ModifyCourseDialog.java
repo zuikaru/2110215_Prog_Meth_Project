@@ -5,7 +5,9 @@ import java.time.format.TextStyle;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
 
+import arisu.Arisu;
 import arisu.exception.InvalidInputException;
 import arisu.model.schedule.ScheduleTableModel;
 import arisu.model.schedule.SingleCourseEntry;
@@ -52,7 +54,7 @@ public class ModifyCourseDialog extends VBox {
 	private SingleCourseEntry currentCourseEntry;
 	protected Stage stage;
 	protected ClassSchedulePane schedulePane;
-	// Formatter
+	private static final String FONT_SIZE_14 = "-fx-font-size: 14px";
 
 	public ModifyCourseDialog(Stage stage, ClassSchedulePane schedulePane) {
 		this.stage = stage;
@@ -72,13 +74,13 @@ public class ModifyCourseDialog extends VBox {
 		building.setPromptText("eg. ENG3");
 		room.setMaxWidth(250);
 		room.setPromptText("eg. 315");
-		courseNoLabel.setStyle("-fx-font-size: 14px");
-		courseNameLabel.setStyle("-fx-font-size: 14px");
-		sectionLabel.setStyle("-fx-font-size: 14px");
-		dayLabel.setStyle("-fx-font-size: 14px");
-		timeLabel.setStyle("-fx-font-size: 14px");
-		buildingLabel.setStyle("-fx-font-size: 14px");
-		roomLabel.setStyle("-fx-font-size: 14px");
+		courseNoLabel.setStyle(FONT_SIZE_14);
+		courseNameLabel.setStyle(FONT_SIZE_14);
+		sectionLabel.setStyle(FONT_SIZE_14);
+		dayLabel.setStyle(FONT_SIZE_14);
+		timeLabel.setStyle(FONT_SIZE_14);
+		buildingLabel.setStyle(FONT_SIZE_14);
+		roomLabel.setStyle(FONT_SIZE_14);
 		// Button
 		commitChange.setOnAction(this::onChangeCommit);
 		cancel.setOnAction(this::onCancel);
@@ -212,7 +214,7 @@ public class ModifyCourseDialog extends VBox {
 		} catch (Exception ex) {
 			Alert alert = UIUtil.makeAlert(AlertType.ERROR, "Some unknown error occurred. Please try again!");
 			alert.show();
-			ex.printStackTrace();
+			Arisu.logger().log(Level.SEVERE,"Problem while trying to modify data", ex);
 		}
 	}
 

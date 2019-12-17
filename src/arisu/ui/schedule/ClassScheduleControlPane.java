@@ -3,6 +3,7 @@ package arisu.ui.schedule;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
@@ -37,6 +38,7 @@ public class ClassScheduleControlPane extends HBox {
 	private FileChooser fileChooser;
 	private static final double DIALOG_WIDTH = 300;
 	private static final double DIALOG_HEIGHT = 600;
+	private static final String FONT_SIZE_14 = "-fx-font-size: 14px";
 
 	public ClassScheduleControlPane(ClassSchedulePane schedulePane) {
 		this.schedulePane = schedulePane;
@@ -44,19 +46,19 @@ public class ClassScheduleControlPane extends HBox {
 		setSpacing(12);
 		setAlignment(Pos.CENTER_RIGHT);
 		save = new Button("Save Image");
-		save.setStyle("-fx-font-size: 14px");
+		save.setStyle(FONT_SIZE_14);
 		save.setOnAction(this::onSave);
 		add = new Button("New");
-		add.setStyle("-fx-font-size: 14px");
+		add.setStyle(FONT_SIZE_14);
 		add.setOnAction(this::onAdd);
 		edit = new Button("Edit");
-		edit.setStyle("-fx-font-size: 14px");
+		edit.setStyle(FONT_SIZE_14);
 		edit.setOnAction(this::onEdit);
 		duplicate = new Button("Duplicate");
-		duplicate.setStyle("-fx-font-size: 14px");
+		duplicate.setStyle(FONT_SIZE_14);
 		duplicate.setOnAction(this::onDuplicate);
 		delete = new Button("Delete");
-		delete.setStyle("-fx-font-size: 14px");
+		delete.setStyle(FONT_SIZE_14);
 		delete.setOnAction(this::onDelete);
 		getChildren().addAll(save, add, duplicate, edit, delete);
 		// File chooser
@@ -159,7 +161,7 @@ public class ClassScheduleControlPane extends HBox {
 			try {
 				ImageIO.write(image, "png", file);
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				Arisu.logger().log(Level.SEVERE,"", ex);
 			}
 		}
 	}

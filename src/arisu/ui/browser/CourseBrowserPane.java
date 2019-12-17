@@ -1,6 +1,5 @@
 package arisu.ui.browser;
 
-import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.Year;
 import java.util.LinkedHashMap;
@@ -12,7 +11,6 @@ import arisu.exception.BadResponseException;
 import arisu.exception.HttpConnectionException;
 import arisu.exception.InvalidInputException;
 import arisu.model.browser.CourseRow;
-import arisu.model.schedule.ScheduleTableModel;
 import arisu.model.schedule.SingleCourseEntry;
 import arisu.service.reg.ClassSchedule;
 import arisu.service.reg.Course;
@@ -23,7 +21,6 @@ import arisu.service.reg.RegChulaAPI;
 import arisu.service.reg.Section;
 import arisu.ui.schedule.ClassSchedulePane;
 import arisu.util.LocalTimeRange;
-import arisu.util.SizeAdapter;
 import arisu.util.UIUtil;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -72,7 +69,7 @@ public class CourseBrowserPane extends VBox {
 		this.app = app;
 		setPadding(new Insets(16));
 		setSpacing(8);
-		SizeAdapter.use(app.getScene(), this);
+		UIUtil.useSizeAdapter(app.getScene(), this);
 		Label title = new Label("Browse Course List");
 		title.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD, 32));
 		setMargin(title, new Insets(0, 0, 0, 32));
@@ -160,7 +157,7 @@ public class CourseBrowserPane extends VBox {
 					Alert closedAlert = UIUtil.makeAlert(AlertType.WARNING, "Closed section, continue?", ButtonType.YES,
 							ButtonType.NO, ButtonType.CANCEL);
 					SimpleBooleanProperty continueValue = new SimpleBooleanProperty(false);
-					closedAlert.showAndWait().ifPresent((type) -> {
+					closedAlert.showAndWait().ifPresent(type -> {
 						if (type == ButtonType.YES) {
 							continueValue.set(true);
 						}
@@ -198,10 +195,7 @@ public class CourseBrowserPane extends VBox {
 		if (courseRow == null) {
 			return false;
 		} else {
-			if (courseRow.getDay() == null || courseRow.getTimeRange() == null || courseRow.getCourseNumber() == null)
-				return false;
-			else
-				return true;
+			return ! (courseRow.getDay() == null || courseRow.getTimeRange() == null || courseRow.getCourseNumber() == null);
 		}
 	}
 

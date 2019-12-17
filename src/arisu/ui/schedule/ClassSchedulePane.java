@@ -16,7 +16,6 @@ import javafx.scene.text.FontWeight;
 
 public class ClassSchedulePane extends BorderPane {
 
-	private Arisu app;
 	private ScheduleTableView tableView;
 	private ScheduleTableModel tableModel;
 	private CourseListPane courseListPane;
@@ -25,7 +24,6 @@ public class ClassSchedulePane extends BorderPane {
 	private Label title;
 
 	public ClassSchedulePane(Arisu app) {
-		this.app = app;
 		setPadding(new Insets(16));
 		// components
 		title = createTitle("Schedule Planner");

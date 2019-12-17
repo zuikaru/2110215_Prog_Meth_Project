@@ -30,9 +30,7 @@ public class AlertHeader extends GridPane {
 		image = new ImageView(loadImage(alert.getAlertType()));
 		image.setPreserveRatio(true);
 		image.setFitWidth(64);
-		alert.alertTypeProperty().addListener((obs) -> {
-			image.setImage(loadImage(alert.getAlertType()));
-		});
+		alert.alertTypeProperty().addListener(obs -> image.setImage(loadImage(alert.getAlertType())));
 		// Add to grid
 		add(header, 0, 0);
 		add(image, 1, 0);

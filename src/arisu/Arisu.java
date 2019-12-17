@@ -1,5 +1,7 @@
 package arisu;
 
+import java.util.logging.Logger;
+
 import arisu.ui.ContentPane;
 import arisu.ui.browser.CourseBrowserPane;
 import arisu.ui.navigation.NavigationPane;
@@ -19,7 +21,6 @@ public class Arisu extends Application {
 	private Style style = Style.DARK;
 	private Stage stage;
 	private Scene scene;
-	private NavigationPane navigation;
 	private ContentPane content;
 	private HBox root;
 
@@ -39,7 +40,7 @@ public class Arisu extends Application {
 		stage.setMaxWidth(1280);
 		stage.setMaxHeight(720);
 		// Components
-		navigation = new NavigationPane(this);
+		NavigationPane navigation = new NavigationPane(this);
 		content = new ContentPane(this);
 		content.add("edit", new ClassSchedulePane(this));
 		content.add("browse", new CourseBrowserPane(this));
@@ -73,6 +74,10 @@ public class Arisu extends Application {
 
 	public Style getStyle() {
 		return style;
+	}
+	
+	public static Logger logger() {
+		return Logger.getLogger("Arisu");
 	}
 
 }

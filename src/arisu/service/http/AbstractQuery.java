@@ -1,6 +1,9 @@
 package arisu.service.http;
 
 import java.lang.reflect.Field;
+import java.util.logging.Level;
+
+import arisu.Arisu;
 
 public abstract class AbstractQuery {
 	@Override
@@ -24,9 +27,8 @@ public abstract class AbstractQuery {
 				try {
 					q = (QueryKeyValue) f.get(this);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					System.out.println("Warning: Failed to get value of field " + f.getName() + " from "
-							+ this.getClass().getSimpleName());
-					e.printStackTrace();
+					Arisu.logger().log(Level.SEVERE, "Failed to get value of field " + f.getName() + " from "
+							+ this.getClass().getSimpleName(), e);
 					continue;
 				}
 				qs.add(q);

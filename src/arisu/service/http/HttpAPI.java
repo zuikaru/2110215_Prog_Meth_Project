@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public abstract class HttpAPI {
 	}
 
 	protected void injectCookie(HttpURLConnection connection) {
-		if (cookieManager.getCookieStore().getCookies().size() > 0) {
+		if (!cookieManager.getCookieStore().getCookies().isEmpty()) {
 			connection.setRequestProperty("Cookie", String.join(";", cookieManager.getCookieStore().getCookies()
 					.stream().map(HttpCookie::toString).collect(Collectors.toList())));
 		}
@@ -71,7 +70,7 @@ public abstract class HttpAPI {
 		try {
 			in = new BufferedReader(new InputStreamReader(con.getInputStream(), encoding));
 			String inputLine;
-			StringBuffer content = new StringBuffer();
+			StringBuilder content = new StringBuilder();
 			while ((inputLine = in.readLine()) != null) {
 				content.append(inputLine);
 			}
@@ -102,7 +101,7 @@ public abstract class HttpAPI {
 		return str + "/" + endpoint;
 	}
 
-	protected HttpURLConnection createConnection(String endpoint) throws MalformedURLException, IOException {
+	protected HttpURLConnection createConnection(String endpoint) throws IOException {
 		URL url = new URL(this.getFullEndpointURL(endpoint));
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		this.injectCookie(con);

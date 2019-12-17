@@ -49,7 +49,7 @@ public class SingleCourseEntry extends CourseAdaptor {
 		if (courseName.length() > 15) {
 			courseName = courseName.substring(0, 15) + "...";
 		}
-		listCell.setText(courseCell.getCourseNumber() + (courseName != null && !courseName.isBlank() ? " - " : "")
+		listCell.setText(courseCell.getCourseNumber() + (!courseName.isBlank() ? " - " : "")
 				+ courseName + " (" + courseCell.getDay().getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ")");
 	}
 

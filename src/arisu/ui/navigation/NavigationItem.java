@@ -32,15 +32,15 @@ public class NavigationItem extends HBox {
 		this.buttonIcon.setFitHeight(32);
 		getChildren().addAll(buttonIcon, label);
 		this.setCursor(Cursor.HAND);
-		this.setOnMouseEntered((e) -> {
+		this.setOnMouseEntered(e -> {
 			this.setEffect(HOVER);
 			this.label.setEffect(HOVER);
 		});
-		this.setOnMouseExited((e) -> {
+		this.setOnMouseExited(e -> {
 			this.setEffect(RESET);
 			this.label.setEffect(RESET);
 		});
-		this.setOnMouseClicked((e) -> {
+		this.setOnMouseClicked(e -> {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				Arisu app = Arisu.app();
 				app.getContentPane().setCurrent(this.link);

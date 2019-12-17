@@ -14,7 +14,7 @@ import javafx.util.converter.DateTimeStringConverter;
 public class TimePicker extends HBox {
 	private TextField start;
 	private TextField end;
-	private static final SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+	private final SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
 	public TimePicker() {
 		setAlignment(Pos.BASELINE_LEFT);

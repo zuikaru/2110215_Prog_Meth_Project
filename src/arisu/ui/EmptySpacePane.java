@@ -2,7 +2,7 @@ package arisu.ui;
 
 import arisu.Arisu;
 import arisu.util.SimpleBackground;
-import arisu.util.SizeAdapter;
+import arisu.util.UIUtil;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -11,9 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 public class EmptySpacePane extends StackPane {
-	private Arisu app;
 	private Scene scene;
-	private Label label;
 	private Node center;
 
 	public EmptySpacePane(Arisu app, String text) {
@@ -26,7 +24,7 @@ public class EmptySpacePane extends StackPane {
 		setBackground(SimpleBackground.web("#7f8c8d"));
 		setAlignment(Pos.CENTER);
 		getChildren().add(center);
-		SizeAdapter.use(scene, this);
+		UIUtil.useSizeAdapter(scene, this);
 	}
 
 	public EmptySpacePane(Arisu app) {

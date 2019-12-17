@@ -2,11 +2,14 @@ package arisu.util;
 
 import arisu.Arisu;
 import arisu.ui.AlertHeader;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import jfxtras.styles.jmetro.JMetro;
 
@@ -43,6 +46,14 @@ public class UIUtil {
 
 	public static Alert makeAlert(AlertType alertType) {
 		return UIUtil.makeAlert(alertType, "");
+	}
+
+	public static void useSizeAdapter(Scene scene, Region node) {
+		node.setPrefSize(scene.getWidth(), scene.getHeight());
+		ChangeListener<Number> sizeListener = (observable, oldValue, newValue) -> node.setPrefSize(scene.getWidth(),
+				scene.getHeight());
+		scene.widthProperty().addListener(sizeListener);
+		scene.heightProperty().addListener(sizeListener);
 	}
 
 }
