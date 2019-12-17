@@ -1,4 +1,4 @@
-package arisu.model;
+package arisu.model.schedule;
 
 import java.time.DayOfWeek;
 import java.util.Comparator;
@@ -29,27 +29,6 @@ public class ScheduleTableModel {
 				continue;
 			usedTimes.put(day, new HashMap<>());
 		}
-		seedDummy();
-	}
-
-	private void seedDummy() {
-		addAll(new SingleCourseEntry(
-				new CourseCell(DayOfWeek.FRIDAY, new LocalTimeRange(9, 0, 12, 0), "2110215", "PROG METH I", 2)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.WEDNESDAY, new LocalTimeRange(13, 0, 16, 0), "2313213",
-						"DIGI PHOTO", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.TUESDAY, new LocalTimeRange(13, 0, 16, 0), "2603284",
-						"STATS PHYS SCI", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.MONDAY, new LocalTimeRange(9, 30, 11, 0), "2110211",
-						"INTRO DATA STRUCT", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.TUESDAY, new LocalTimeRange(9, 30, 11, 30), "2110202",
-						"DISCRETE STRUC COM", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.THURSDAY, new LocalTimeRange(9, 30, 11, 30), "2110202",
-						"DISCRETE STRUC COM", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.MONDAY, new LocalTimeRange(13, 0, 16, 0), "2110263",
-						"DIG LOGIC LAB I", 1)),
-				new SingleCourseEntry(new CourseCell(DayOfWeek.WEDNESDAY, new LocalTimeRange(9, 30, 11, 0), "2110211",
-						"INTRO DATA STRUCT", 1)));
-		sort();
 	}
 
 	public void addAll(CourseAdaptor... courseAdaptors) {

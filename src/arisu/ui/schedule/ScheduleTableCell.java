@@ -4,7 +4,8 @@ import java.time.DayOfWeek;
 
 import arisu.util.LocalTimeRange;
 
-public interface ScheduleTableCell{
+public interface ScheduleTableCell {
 	DayOfWeek getDay();
+
 	LocalTimeRange getTimeRange();
 }

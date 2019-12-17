@@ -1,4 +1,4 @@
-package arisu.model;
+package arisu.model.schedule;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
@@ -30,16 +30,17 @@ public class SingleCourseEntry extends CourseAdaptor {
 	public List<CourseCell> getCourseCells() {
 		return singleCourse;
 	}
-	
+
 	public void setCourseCell(CourseCell courseCell) {
 		this.courseCell = courseCell;
 		this.courseCell.setOrigin(this);
 		this.singleCourse = List.<CourseCell>of(courseCell);
 	}
-	
-	public void modify(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName,
-			int section, String building, String room, String teachingMethod) {
-		setCourseCell(new CourseCell(day, timeRange, courseNumber, courseName, section, building, room, teachingMethod));
+
+	public void modify(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName, int section,
+			String building, String room, String teachingMethod) {
+		setCourseCell(
+				new CourseCell(day, timeRange, courseNumber, courseName, section, building, room, teachingMethod));
 	}
 
 	@Override

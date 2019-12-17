@@ -2,11 +2,11 @@ package arisu.ui.schedule;
 
 import java.time.DayOfWeek;
 
-import arisu.model.CourseAdaptor;
+import arisu.model.schedule.CourseAdaptor;
 import arisu.util.LocalTimeRange;
 
-public class CourseCell extends LabelCell implements ScheduleTableCell{
-	
+public class CourseCell extends LabelCell implements ScheduleTableCell {
+
 	private DayOfWeek day;
 	private LocalTimeRange timeRange;
 	private String courseNumber;
@@ -16,9 +16,9 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 	private String building;
 	private String room;
 	private CourseAdaptor origin;
-	
-	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName,
-			int section,String building, String room, String teachingMethod) {
+
+	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName, int section,
+			String building, String room, String teachingMethod) {
 		super("");
 		this.day = day;
 		this.timeRange = timeRange;
@@ -30,9 +30,8 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 		this.room = room;
 		setText(buildText());
 	}
-	
-	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName,
-			int section) {
+
+	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName, int section) {
 		this(day, timeRange, courseNumber, courseName, section, null, null, null);
 	}
 
@@ -78,11 +77,11 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 	public String getRoom() {
 		return room;
 	}
-	
+
 	public CourseAdaptor getOrigin() {
 		return origin;
 	}
-	
+
 	public void setOrigin(CourseAdaptor courseAdaptor) {
 		this.origin = courseAdaptor;
 	}
@@ -93,5 +92,5 @@ public class CourseCell extends LabelCell implements ScheduleTableCell{
 				+ ", courseName=" + courseName + ", section=" + section + ", teachingMethod=" + teachingMethod
 				+ ", building=" + building + ", room=" + room + "]";
 	}
-	
+
 }

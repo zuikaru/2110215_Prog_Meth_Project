@@ -1,7 +1,7 @@
 package arisu.ui.schedule;
 
 import arisu.Arisu;
-import arisu.model.ScheduleTableModel;
+import arisu.model.schedule.ScheduleTableModel;
 import arisu.util.SimpleBorder;
 import arisu.util.UIUtil;
 import javafx.geometry.Insets;
@@ -14,16 +14,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class ClassSchedulePane extends BorderPane{
-	
+public class ClassSchedulePane extends BorderPane {
+
 	private Arisu app;
 	private ScheduleTableView tableView;
 	private ScheduleTableModel tableModel;
 	private CourseListPane courseListPane;
 	private ClassScheduleControlPane controlPane;
 	private ScrollPane tableScroll;
-	private Label title; 
-	
+	private Label title;
+
 	public ClassSchedulePane(Arisu app) {
 		this.app = app;
 		setPadding(new Insets(16));
@@ -43,9 +43,9 @@ public class ClassSchedulePane extends BorderPane{
 		setAlignment(controlPane, Pos.TOP_RIGHT);
 		setAlignment(tableScroll, Pos.TOP_LEFT);
 		// margin
-		setMargin(title, new Insets(0,0,0,32));
-		setMargin(tableScroll, new Insets(8,8,8,8));
-		setMargin(courseListPane, new Insets(8,8,8,8));
+		setMargin(title, new Insets(0, 0, 0, 32));
+		setMargin(tableScroll, new Insets(8, 8, 8, 8));
+		setMargin(courseListPane, new Insets(8, 8, 8, 8));
 		setTop(title);
 		setCenter(tableScroll);
 		setBottom(controlPane);
@@ -53,25 +53,25 @@ public class ClassSchedulePane extends BorderPane{
 		// Fix blurry ScrollPane
 		UIUtil.fixBlurryScrollPane(tableScroll);
 	}
-	
+
 	private Label createTitle(String name) {
 		Label label = new Label(name);
 		label.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD, 32));
 		return label;
 	}
-	
+
 	public ScheduleTableView getTableView() {
 		return tableView;
 	}
-	
+
 	public ScheduleTableModel getTableModel() {
 		return tableModel;
 	}
-	
+
 	public CourseListPane getCourseListPane() {
 		return this.courseListPane;
 	}
-	
+
 	public ClassScheduleControlPane getControlPane() {
 		return this.controlPane;
 	}

@@ -33,13 +33,12 @@ public class TimePicker extends HBox {
 	public LocalTimeRange getTimeRange() {
 		String startText = start.getText().strip();
 		String endText = end.getText().strip();
-		if(startText.length() == 0 || endText.length() == 0) {
+		if (startText.length() == 0 || endText.length() == 0) {
 			throw new IllegalArgumentException("Time must not be empty!");
 		}
 		try {
 			return new LocalTimeRange(LocalTime.parse(startText), LocalTime.parse(endText));
-		}
-		catch(DateTimeParseException ex) {
+		} catch (DateTimeParseException ex) {
 			throw new IllegalArgumentException("Invalid time format! Time must be in format of HH:mm");
 		}
 	}

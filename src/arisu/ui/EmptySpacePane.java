@@ -10,14 +10,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
-public class EmptySpacePane extends StackPane{
+public class EmptySpacePane extends StackPane {
 	private Arisu app;
 	private Scene scene;
 	private Label label;
 	private Node center;
+
 	public EmptySpacePane(Arisu app, String text) {
 		this(app, newLabel(text));
 	}
+
 	public EmptySpacePane(Arisu app, Node node) {
 		this.scene = app.getScene();
 		center = node;
@@ -26,11 +28,11 @@ public class EmptySpacePane extends StackPane{
 		getChildren().add(center);
 		SizeAdapter.use(scene, this);
 	}
-	
+
 	public EmptySpacePane(Arisu app) {
 		this(app, "It's empty here.");
 	}
-	
+
 	private static Label newLabel(String text) {
 		Label label = new Label(text);
 		label.setFont(Font.font(32));

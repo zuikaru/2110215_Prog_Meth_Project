@@ -45,7 +45,7 @@ public class CourseListQuery extends AbstractQuery {
 		magicExamStart = new QueryParameter<>("examstart");
 		magicExamEnd = new QueryParameter<>("examend");
 		activeStatus = new QueryParameter<>("activestatus", "ON");
-		magicCurrentAcademicYear = new QueryParameter<>("acadyear", Year.now(), TO_BUDDHIST_YEAR);
+		magicCurrentAcademicYear = new QueryParameter<>("acadyearEfd", Year.now(), TO_BUDDHIST_YEAR);
 		download = new QueryParameter<>("download");
 	}
 
@@ -55,7 +55,7 @@ public class CourseListQuery extends AbstractQuery {
 		// Normal
 		semester = Semester.FIRST;
 		studyProgram = StudyProgram.SEMESTER;
-		academicYear = new QueryParameter<Year>("acadyearEfd", Year.now(), TO_BUDDHIST_YEAR);
+		academicYear = new QueryParameter<Year>("acadyear", Year.now(), TO_BUDDHIST_YEAR);
 		courseNo = new QueryParameter<>("courseno");
 		courseName = new QueryParameter<>("coursename");
 		faculty = new QueryParameter<>("faculty");

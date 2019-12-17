@@ -45,12 +45,11 @@ public class AlertHeader extends GridPane {
 		imageColumn.setHgrow(Priority.NEVER);
 		getColumnConstraints().setAll(textColumn, imageColumn);
 	}
-	
 
 	private Image loadImage(AlertType alertType) {
 		if (alertType == null || alertType == AlertType.NONE)
 			return null;
-		else{
+		else {
 			return new Image(getRes("assets/dialog/" + alertType.toString().toLowerCase() + ".png"));
 		}
 	}

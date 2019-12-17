@@ -15,33 +15,34 @@ import jfxtras.styles.jmetro.JMetro;
  */
 public class UIUtil {
 	/**
-	 * Fix blurry element that wrapped inside the ScrollPane
+	 * Fix blurry element that is wrapped inside the ScrollPane
+	 * 
 	 * @param scrollPanes A list of ScrollPane node to be fixed
 	 * @see https://stackoverflow.com/a/50486726
 	 */
-	public static void fixBlurryScrollPane(ScrollPane ...scrollPanes) {
-		for(ScrollPane each : scrollPanes) {
+	public static void fixBlurryScrollPane(ScrollPane... scrollPanes) {
+		for (ScrollPane each : scrollPanes) {
 			each.skinProperty().addListener((obs, o, n) -> {
 				StackPane stackPane = (StackPane) each.lookup("ScrollPane .viewport");
 				stackPane.setCache(false);
 			});
 		}
 	}
-	
+
 	public static void styleNode(Parent parent) {
 		new JMetro(parent, Arisu.app().getStyle());
 		parent.getStyleClass().add("background");
 	}
-	
-	public static Alert makeAlert(AlertType alertType, String contentText, ButtonType ...buttons) {
+
+	public static Alert makeAlert(AlertType alertType, String contentText, ButtonType... buttons) {
 		Alert alert = new Alert(alertType, contentText, buttons);
 		alert.getDialogPane().setHeader(new AlertHeader(alert));
 		UIUtil.styleNode(alert.getDialogPane());
 		return alert;
 	}
-	
+
 	public static Alert makeAlert(AlertType alertType) {
 		return UIUtil.makeAlert(alertType, "");
 	}
-	
+
 }

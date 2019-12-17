@@ -7,8 +7,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import arisu.exception.InvalidInputException;
-import arisu.model.ScheduleTableModel;
-import arisu.model.SingleCourseEntry;
+import arisu.model.schedule.ScheduleTableModel;
+import arisu.model.schedule.SingleCourseEntry;
 import arisu.util.LocalTimeRange;
 import arisu.util.UIUtil;
 import javafx.collections.FXCollections;
@@ -143,16 +143,14 @@ public class ModifyCourseDialog extends VBox {
 		} catch (IllegalArgumentException ex) {
 			messages.put(timeLabel.getText(), "Invalid time range: " + ex.getMessage());
 		}
-		if(timeRange != null) {
+		if (timeRange != null) {
 			if (timeRange.start().isBefore(ScheduleTableView.TIME_LOWER_LIMIT)
 					|| timeRange.end().isAfter(ScheduleTableView.TIME_UPPER_LIMIT)) {
 				messages.put(timeLabel.getText(),
 						"Only times greater than or equal 08:00 and lesser than or equal 16:00 are supported!");
-			}
-			else if(timeRange.start().getMinute()%30 != 0 || timeRange.end().getMinute()%30 != 0) {
-				messages.put(timeLabel.getText(),
-						"Miutes must be divisible by 30!");
-				
+			} else if (timeRange.start().getMinute() % 30 != 0 || timeRange.end().getMinute() % 30 != 0) {
+				messages.put(timeLabel.getText(), "Miutes must be divisible by 30!");
+
 			}
 		}
 		if (messages.size() > 0) {

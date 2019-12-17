@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import arisu.util.LocalTimeRange;
 
-public class CellPosition implements ScheduleTableCell{
+public class CellPosition implements ScheduleTableCell {
 	private DayOfWeek day;
 	private LocalTimeRange range;
 
@@ -45,5 +45,5 @@ public class CellPosition implements ScheduleTableCell{
 	public String toString() {
 		return "CellPosition [day=" + day + ", range=" + range + "]";
 	}
-	
+
 }

@@ -2,6 +2,7 @@ package arisu.service.reg;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Section {
 	private int number;
@@ -9,11 +10,11 @@ public class Section {
 	private int student;
 	private int maxStudent;
 	private List<ClassSchedule> classSchedules;
-	private List<String> instructors;
+	private Set<String> instructors;
 	private String note;
-	
+
 	public Section(int number, boolean isClosed, int student, int maxStudent, List<ClassSchedule> classSchedules,
-			List<String> instructors, String note) {
+			Set<String> instructors, String note) {
 		super();
 		this.number = number;
 		this.isClosed = isClosed;
@@ -23,9 +24,9 @@ public class Section {
 		this.instructors = instructors;
 		this.note = note;
 	}
-	
+
 	public Section(int number, boolean isClosed, int student, int maxStudent, List<ClassSchedule> classSchedules,
-			List<String> instructors) {
+			Set<String> instructors) {
 		this(number, isClosed, student, maxStudent, classSchedules, instructors, "");
 	}
 
@@ -49,7 +50,7 @@ public class Section {
 		return classSchedules;
 	}
 
-	public List<String> getInstructors() {
+	public Set<String> getInstructors() {
 		return instructors;
 	}
 
@@ -82,5 +83,5 @@ public class Section {
 				+ maxStudent + ", classSchedules=" + classSchedules + ", instructors=" + instructors + ", note=" + note
 				+ "]";
 	}
-	
+
 }

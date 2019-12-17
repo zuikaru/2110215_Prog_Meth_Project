@@ -1,7 +1,7 @@
 package arisu;
 
 import arisu.ui.ContentPane;
-import arisu.ui.CoursePane;
+import arisu.ui.browser.CourseBrowserPane;
 import arisu.ui.navigation.NavigationPane;
 import arisu.ui.schedule.ClassSchedulePane;
 import arisu.util.UIUtil;
@@ -42,7 +42,7 @@ public class Arisu extends Application {
 		navigation = new NavigationPane(this);
 		content = new ContentPane(this);
 		content.add("edit", new ClassSchedulePane(this));
-		content.add("browse", new CoursePane(this));
+		content.add("browse", new CourseBrowserPane(this));
 		content.setCurrent("edit");
 		root.getChildren().addAll(navigation, content);
 		primaryStage.setTitle("Class Schedule Planner");

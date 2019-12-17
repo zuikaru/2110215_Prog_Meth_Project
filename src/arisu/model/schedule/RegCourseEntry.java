@@ -1,4 +1,4 @@
-package arisu.model;
+package arisu.model.schedule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,22 +11,22 @@ import arisu.ui.schedule.CourseCell;
 import arisu.util.LocalTimeRange;
 import javafx.scene.control.ListCell;
 
-public class RegCourseEntry extends CourseAdaptor{
-	
+public class RegCourseEntry extends CourseAdaptor {
+
 	private List<CourseCell> courseCells;
 	private Course course;
 	private CourseDetail detail;
 	private Section section;
-	
+
 	public RegCourseEntry(Course course, CourseDetail detail, Section section) {
 		this.courseCells = new ArrayList<>();
 		this.course = course;
 		this.detail = detail;
 		this.section = section;
-		for(ClassSchedule schedule : section.getClassSchedules()) {
-			CourseCell each = new CourseCell(
-					schedule.getDay(), new LocalTimeRange(schedule.getStart(), schedule.getEnd()), 
-					course.getNumber(), course.getName(), section.getNumber());
+		for (ClassSchedule schedule : section.getClassSchedules()) {
+			CourseCell each = new CourseCell(schedule.getDay(),
+					new LocalTimeRange(schedule.getStart(), schedule.getEnd()), course.getNumber(), course.getName(),
+					section.getNumber());
 			each.setOrigin(this);
 			courseCells.add(each);
 		}

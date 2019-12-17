@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import arisu.exception.HttpConnectionException;
+
 public abstract class HttpAPI {
 	static final String COOKIES_HEADER = "Set-Cookie";
 	protected CookieManager cookieManager;
@@ -26,17 +28,17 @@ public abstract class HttpAPI {
 		this.cookieManager = new CookieManager();
 	}
 
-	public void init() {
+	public void init() throws HttpConnectionException {
 		this.initSession();
 	}
 
-	public void refresh() {
+	public void refresh() throws HttpConnectionException {
 		this.refreshSession();
 	}
 
-	public abstract void initSession();
+	public abstract void initSession() throws HttpConnectionException;
 
-	public void refreshSession() {
+	public void refreshSession() throws HttpConnectionException {
 		this.initSession();
 	}
 
@@ -55,7 +57,7 @@ public abstract class HttpAPI {
 		}
 	}
 
-	public String sendGet(String endpoint) {
+	public String sendGet(String endpoint) throws HttpConnectionException {
 		HttpsURLConnection con = null;
 		String url = endpoint;
 		try {
@@ -63,39 +65,31 @@ public abstract class HttpAPI {
 			con.setRequestMethod("GET");
 			con.connect();
 		} catch (IOException e) {
-			System.out.println("Error: Can't connect to " + url + "!");
-			e.printStackTrace();
+			throw new HttpConnectionException("Can't connect to" + url + "!", con, e);
 		}
-		if (con != null) {
-			BufferedReader in = null;
-			try {
-				in = new BufferedReader(new InputStreamReader(con.getInputStream(), encoding));
-				String inputLine;
-				StringBuffer content = new StringBuffer();
-				while ((inputLine = in.readLine()) != null) {
-					content.append(inputLine);
-				}
-				in.close();
-				con.disconnect();
-				return content.toString();
-			} catch (UnsupportedEncodingException e) {
-				System.out.println("Error: " + encoding + " encoding is not supported!");
-				e.printStackTrace();
-			} catch (IOException e) {
-				System.out.println("Error: problem while reading http response!");
-				e.printStackTrace();
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(con.getInputStream(), encoding));
+			String inputLine;
+			StringBuffer content = new StringBuffer();
+			while ((inputLine = in.readLine()) != null) {
+				content.append(inputLine);
 			}
-			return null;
-		} else {
-			return null;
+			in.close();
+			con.disconnect();
+			return content.toString();
+		} catch (UnsupportedEncodingException e) {
+			throw new HttpConnectionException(encoding + " encoding is not supported!", con, e);
+		} catch (IOException e) {
+			throw new HttpConnectionException("Problem while reading response!", con, e);
 		}
 	}
 
-	public String sendGet(String endpoint, String queryString) {
+	public String sendGet(String endpoint, String queryString) throws HttpConnectionException {
 		return this.sendGet(endpoint + "?" + queryString);
 	}
 
-	public String sendGet(String endpoint, AbstractQuery query) {
+	public String sendGet(String endpoint, AbstractQuery query) throws HttpConnectionException {
 		return this.sendGet(endpoint, query.toString());
 	}
 

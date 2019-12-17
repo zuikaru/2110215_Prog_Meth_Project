@@ -13,15 +13,16 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
-public class NavigationItem extends HBox{
+public class NavigationItem extends HBox {
 	private static final Effect RESET = new ColorAdjust();
 	private static final Effect HOVER = new ColorAdjust(0, 0, -0.25, 0);
 	private ImageView buttonIcon;
 	private Label label;
 	private String link;
+
 	public NavigationItem(String name, Image image, String link) {
 		setSpacing(16);
-		setPadding(new Insets(16,0,16,16));
+		setPadding(new Insets(16, 0, 16, 16));
 		this.link = link;
 		this.label = new Label(name);
 		this.label.setFont(Font.font(18));
@@ -40,15 +41,17 @@ public class NavigationItem extends HBox{
 			this.label.setEffect(RESET);
 		});
 		this.setOnMouseClicked((e) -> {
-			if(e.getButton() == MouseButton.PRIMARY){
+			if (e.getButton() == MouseButton.PRIMARY) {
 				Arisu app = Arisu.app();
 				app.getContentPane().setCurrent(this.link);
 			}
 		});
 	}
+
 	public NavigationItem(String name, Image image) {
 		this(name, image, name.toLowerCase());
 	}
+
 	public NavigationItem(String name) {
 		this(name, new Image("assets/menu/chevron-right-white-256.png"), name.toLowerCase());
 	}

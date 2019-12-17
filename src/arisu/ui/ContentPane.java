@@ -7,35 +7,44 @@ import arisu.Arisu;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
-public class ContentPane extends StackPane{
+public class ContentPane extends StackPane {
 	private Map<String, Node> contents;
 	private String current;
+
 	public ContentPane(Arisu app) {
 		contents = new HashMap<>();
 	}
-	
+
 	public void add(String link, Node node) {
 		contents.put(link, node);
 	}
-	
+
+	public <T extends Node> T getNodeAs(String link, Class<T> clazz) {
+		if (!contents.containsKey(link)) {
+			return null;
+		}
+		return clazz.cast(contents.get(link));
+	}
+
 	public void setCurrent(String name) {
-		if(current != null && current.equals(name)) return;
+		if (current != null && current.equals(name))
+			return;
 		current = name;
-		if(contents.containsKey(current)) {
+		if (contents.containsKey(current)) {
 			Node node = contents.get(current);
-			if(node != null) {
-				if(getChildren().isEmpty())
+			if (node != null) {
+				if (getChildren().isEmpty())
 					getChildren().add(node);
 				else
 					getChildren().set(0, node);
 			}
 		}
 	}
-	
+
 	public Node getCurrentNode() {
 		return contents.get(current);
 	}
-	
+
 	public String getCurrent() {
 		return current;
 	}

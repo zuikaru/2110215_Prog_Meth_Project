@@ -7,8 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import arisu.Arisu;
-import arisu.model.CourseAdaptor;
-import arisu.model.SingleCourseEntry;
+import arisu.model.schedule.CourseAdaptor;
+import arisu.model.schedule.SingleCourseEntry;
 import arisu.util.UIUtil;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -91,7 +91,8 @@ public class ClassScheduleControlPane extends HBox {
 	}
 
 	public void onEdit(ActionEvent event) {
-		if(!checkEligibility()) return;
+		if (!checkEligibility())
+			return;
 		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
 		// setup stage
 		Stage stage = createBaseStage();
@@ -105,9 +106,10 @@ public class ClassScheduleControlPane extends HBox {
 		// show and wait for input
 		showDialogUsing(stage, root);
 	}
-	
+
 	public void onDuplicate(ActionEvent event) {
-		if(!checkEligibility()) return;
+		if (!checkEligibility())
+			return;
 		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
 		// setup stage
 		Stage stage = createBaseStage();
@@ -119,20 +121,20 @@ public class ClassScheduleControlPane extends HBox {
 		// show and wait for input
 		showDialogUsing(stage, root);
 	}
-	
+
 	private boolean checkEligibility() {
 		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
 		if (selected == null) {
 			return false;
 		}
-		if(!(selected instanceof SingleCourseEntry)) {
+		if (!(selected instanceof SingleCourseEntry)) {
 			Alert alert = UIUtil.makeAlert(AlertType.ERROR, "Course data from Reg can't be edit!");
 			alert.show();
 			return false;
 		}
 		return true;
 	}
-	
+
 	private void showDialogUsing(Stage stage, Parent root) {
 		Scene scene = new Scene(root, DIALOG_WIDTH, DIALOG_HEIGHT);
 		// show and wait for input
