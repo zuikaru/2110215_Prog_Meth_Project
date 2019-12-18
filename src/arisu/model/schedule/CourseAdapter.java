@@ -6,11 +6,11 @@ import arisu.ui.schedule.CourseCell;
 import arisu.ui.schedule.ScheduleTableView;
 import javafx.scene.control.ListCell;
 
-public abstract class CourseAdaptor implements ScheduleTableMutator {
+public abstract class CourseAdapter implements ScheduleTableMutator {
 
 	public abstract List<CourseCell> getCourseCells();
 
-	public abstract void updateListCell(ListCell<CourseAdaptor> listCell);
+	public abstract void updateListCell(ListCell<CourseAdapter> listCell);
 
 	public String getCourseName() {
 		return getFirstCourseCell().getCourseName();

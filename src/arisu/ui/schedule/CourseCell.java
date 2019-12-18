@@ -2,7 +2,7 @@ package arisu.ui.schedule;
 
 import java.time.DayOfWeek;
 
-import arisu.model.schedule.CourseAdaptor;
+import arisu.model.schedule.CourseAdapter;
 import arisu.util.LocalTimeRange;
 
 public class CourseCell extends LabelCell implements ScheduleTableCell {
@@ -15,7 +15,7 @@ public class CourseCell extends LabelCell implements ScheduleTableCell {
 	private String teachingMethod;
 	private String building;
 	private String room;
-	private CourseAdaptor origin;
+	private CourseAdapter origin;
 
 	public CourseCell(DayOfWeek day, LocalTimeRange timeRange, String courseNumber, String courseName, int section,
 			String building, String room, String teachingMethod) {
@@ -77,11 +77,11 @@ public class CourseCell extends LabelCell implements ScheduleTableCell {
 		return room;
 	}
 
-	public CourseAdaptor getOrigin() {
+	public CourseAdapter getOrigin() {
 		return origin;
 	}
 
-	public void setOrigin(CourseAdaptor courseAdaptor) {
+	public void setOrigin(CourseAdapter courseAdaptor) {
 		this.origin = courseAdaptor;
 	}
 

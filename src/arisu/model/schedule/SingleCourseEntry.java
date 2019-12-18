@@ -9,7 +9,7 @@ import arisu.ui.schedule.CourseCell;
 import arisu.util.LocalTimeRange;
 import javafx.scene.control.ListCell;
 
-public class SingleCourseEntry extends CourseAdaptor {
+public class SingleCourseEntry extends CourseAdapter {
 
 	private List<CourseCell> singleCourse;
 	private CourseCell courseCell;
@@ -44,7 +44,7 @@ public class SingleCourseEntry extends CourseAdaptor {
 	}
 
 	@Override
-	public void updateListCell(ListCell<CourseAdaptor> listCell) {
+	public void updateListCell(ListCell<CourseAdapter> listCell) {
 		String courseName = courseCell.getCourseName();
 		if (courseName.length() > 15) {
 			courseName = courseName.substring(0, 15) + "...";

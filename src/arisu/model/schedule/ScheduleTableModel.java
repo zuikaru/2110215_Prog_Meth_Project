@@ -14,12 +14,12 @@ import javafx.collections.ObservableList;
 
 public class ScheduleTableModel {
 	private ScheduleTableView tableView;
-	private ObservableList<CourseAdaptor> courses;
-	private Map<DayOfWeek, Map<LocalTimeRange, CourseAdaptor>> usedTimes;
+	private ObservableList<CourseAdapter> courses;
+	private Map<DayOfWeek, Map<LocalTimeRange, CourseAdapter>> usedTimes;
 
 	public ScheduleTableModel(ClassSchedulePane schedulePane) {
 		this.tableView = schedulePane.getTableView();
-		this.courses = FXCollections.<CourseAdaptor>observableArrayList();
+		this.courses = FXCollections.<CourseAdapter>observableArrayList();
 		this.courses.addListener(this::onChanged);
 		this.usedTimes = new HashMap<>();
 		for (DayOfWeek day : DayOfWeek.values()) {
@@ -29,23 +29,23 @@ public class ScheduleTableModel {
 		}
 	}
 
-	public void addAll(CourseAdaptor... courseAdaptors) {
-		for (CourseAdaptor courseAdaptor : courseAdaptors) {
-			add(courseAdaptor);
+	public void addAll(CourseAdapter... courseAdapters) {
+		for (CourseAdapter courseAdapter : courseAdapters) {
+			add(courseAdapter);
 		}
 	}
 
-	public void add(CourseAdaptor courseAdaptor) {
-		markUsedTime(courseAdaptor);
-		this.courses.add(courseAdaptor);
+	public void add(CourseAdapter courseAdapter) {
+		markUsedTime(courseAdapter);
+		this.courses.add(courseAdapter);
 	}
 
-	public void remove(CourseAdaptor courseAdaptor) {
-		freeUsedTime(courseAdaptor);
-		this.courses.remove(courseAdaptor);
+	public void remove(CourseAdapter courseAdapter) {
+		freeUsedTime(courseAdapter);
+		this.courses.remove(courseAdapter);
 	}
 
-	public void replace(CourseAdaptor oldVal, CourseAdaptor newVal) {
+	public void replace(CourseAdapter oldVal, CourseAdapter newVal) {
 		freeUsedTime(oldVal);
 		int index = this.courses.indexOf(oldVal);
 		this.courses.remove(index);
@@ -55,44 +55,44 @@ public class ScheduleTableModel {
 	}
 
 	public void sort() {
-		FXCollections.sort(courses, Comparator.comparing(CourseAdaptor::getCourseNumber));
+		FXCollections.sort(courses, Comparator.comparing(CourseAdapter::getCourseNumber));
 	}
 
-	private void markUsedTime(CourseAdaptor courseAdaptor) {
+	private void markUsedTime(CourseAdapter courseAdaptor) {
 		for (CourseCell cell : courseAdaptor.getCourseCells()) {
 			usedTimes.get(cell.getDay()).put(cell.getTimeRange(), courseAdaptor);
 		}
 	}
 
-	private void freeUsedTime(CourseAdaptor courseAdaptor) {
+	private void freeUsedTime(CourseAdapter courseAdaptor) {
 		for (CourseCell cell : courseAdaptor.getCourseCells()) {
 			usedTimes.get(cell.getDay()).remove(cell.getTimeRange());
 		}
 	}
 
-	public void onChanged(ListChangeListener.Change<? extends CourseAdaptor> change) {
+	public void onChanged(ListChangeListener.Change<? extends CourseAdapter> change) {
 		while (change.next()) {
 			if (change.wasAdded()) {
-				for (CourseAdaptor cc : change.getAddedSubList()) {
+				for (CourseAdapter cc : change.getAddedSubList()) {
 					cc.addTo(tableView);
 				}
 			} else if (change.wasRemoved()) {
-				for (CourseAdaptor cc : change.getRemoved()) {
+				for (CourseAdapter cc : change.getRemoved()) {
 					cc.removeFrom(tableView);
 				}
 			}
 		}
 	}
 
-	public ObservableList<CourseAdaptor> getCourses() {
+	public ObservableList<CourseAdapter> getCourses() {
 		return courses;
 	}
 
-	public boolean newItemConflict(CourseAdaptor input) {
+	public boolean newItemConflict(CourseAdapter input) {
 		// For each cell
 		for (CourseCell cell : input.getCourseCells()) {
 			// Key: time range, Value: owner
-			Map<LocalTimeRange, CourseAdaptor> times = usedTimes.get(cell.getDay());
+			Map<LocalTimeRange, CourseAdapter> times = usedTimes.get(cell.getDay());
 			// check if it overlap with some other course
 			for (LocalTimeRange time : times.keySet()) {
 				if (cell.getTimeRange().overlapWith(time) && !input.equals(times.get(time))) {
@@ -103,7 +103,7 @@ public class ScheduleTableModel {
 		return false;
 	}
 
-	public boolean oldItemConflict(Map<DayOfWeek, LocalTimeRange> times, CourseAdaptor except) {
+	public boolean oldItemConflict(Map<DayOfWeek, LocalTimeRange> times, CourseAdapter except) {
 		// For each cell
 		for (DayOfWeek day : times.keySet()) {
 			LocalTimeRange timeRequired = times.get(day);
@@ -117,7 +117,7 @@ public class ScheduleTableModel {
 		return false;
 	}
 
-	public boolean oldItemConflict(DayOfWeek dayOfWeek, LocalTimeRange timeRange, CourseAdaptor except) {
+	public boolean oldItemConflict(DayOfWeek dayOfWeek, LocalTimeRange timeRange, CourseAdapter except) {
 		return oldItemConflict(Map.of(dayOfWeek, timeRange), except);
 	}
 

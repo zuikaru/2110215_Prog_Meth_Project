@@ -1,6 +1,6 @@
 package arisu.ui.schedule;
 
-import arisu.model.schedule.CourseAdaptor;
+import arisu.model.schedule.CourseAdapter;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -12,9 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextAlignment;
 
-public class CourseListPane extends ListView<CourseAdaptor> {
+public class CourseListPane extends ListView<CourseAdapter> {
 	private ClassSchedulePane schedulePane;
-	private CourseAdaptor selected;
+	private CourseAdapter selected;
 	private Label empty;
 
 	public CourseListPane(ClassSchedulePane schedulePane) {
@@ -41,21 +41,21 @@ public class CourseListPane extends ListView<CourseAdaptor> {
 		}
 	}
 
-	private ListCell<CourseAdaptor> createListCell(ListView<CourseAdaptor> list) {
+	private ListCell<CourseAdapter> createListCell(ListView<CourseAdapter> list) {
 		return new CourseListCell();
 	}
 
-	private void changed(ObservableValue<? extends CourseAdaptor> ov, CourseAdaptor oldVal, CourseAdaptor newVal) {
+	private void changed(ObservableValue<? extends CourseAdapter> ov, CourseAdapter oldVal, CourseAdapter newVal) {
 		this.selected = newVal;
 	}
 
-	public CourseAdaptor getSelected() {
+	public CourseAdapter getSelected() {
 		return this.selected;
 	}
 
-	static class CourseListCell extends ListCell<CourseAdaptor> {
+	static class CourseListCell extends ListCell<CourseAdapter> {
 		@Override
-		public void updateItem(CourseAdaptor item, boolean empty) {
+		public void updateItem(CourseAdapter item, boolean empty) {
 			super.updateItem(item, empty);
 			if (!empty) {
 				setGraphic(new Label("\u2022"));

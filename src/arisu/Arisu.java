@@ -29,7 +29,7 @@ public class Arisu extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		// static reference to application
 		instance = this;
 		stage = primaryStage;

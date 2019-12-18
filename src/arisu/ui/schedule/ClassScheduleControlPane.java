@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import javax.imageio.ImageIO;
 
 import arisu.Arisu;
-import arisu.model.schedule.CourseAdaptor;
+import arisu.model.schedule.CourseAdapter;
 import arisu.model.schedule.SingleCourseEntry;
 import arisu.util.UIUtil;
 import javafx.embed.swing.SwingFXUtils;
@@ -95,7 +95,7 @@ public class ClassScheduleControlPane extends HBox {
 	public void onEdit(ActionEvent event) {
 		if (!checkEligibility())
 			return;
-		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
+		CourseAdapter selected = schedulePane.getCourseListPane().getSelected();
 		// setup stage
 		Stage stage = createBaseStage();
 		stage.getIcons().add(new Image(ClassLoader.getSystemResource("assets/dialog/pencil.png").toString()));
@@ -112,7 +112,7 @@ public class ClassScheduleControlPane extends HBox {
 	public void onDuplicate(ActionEvent event) {
 		if (!checkEligibility())
 			return;
-		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
+		CourseAdapter selected = schedulePane.getCourseListPane().getSelected();
 		// setup stage
 		Stage stage = createBaseStage();
 		stage.getIcons().add(new Image(ClassLoader.getSystemResource("assets/dialog/copy.png").toString()));
@@ -125,7 +125,7 @@ public class ClassScheduleControlPane extends HBox {
 	}
 
 	private boolean checkEligibility() {
-		CourseAdaptor selected = schedulePane.getCourseListPane().getSelected();
+		CourseAdapter selected = schedulePane.getCourseListPane().getSelected();
 		if (selected == null) {
 			return false;
 		}
@@ -167,7 +167,7 @@ public class ClassScheduleControlPane extends HBox {
 	}
 
 	public void onDelete(ActionEvent event) {
-		CourseAdaptor cc = schedulePane.getCourseListPane().getSelected();
+		CourseAdapter cc = schedulePane.getCourseListPane().getSelected();
 		if (cc != null) {
 			cc.removeFrom(schedulePane.getTableView());
 			schedulePane.getTableModel().remove(cc);
